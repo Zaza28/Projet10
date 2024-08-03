@@ -43,11 +43,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  // eslint-disable-next-line react/no-array-index-key
                   key={`${event.id}`}
                   type="radio"
                   name="radio-button"
                   checked={idx === radioIdx}
+                  onChange={()=> idx(radioIdx)}
                 />
               ))}
             </div>
