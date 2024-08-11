@@ -27,9 +27,13 @@ export const DataProvider = ({ children }) => {
     }
   }, []);
   useEffect(() => {
+    // verifie que les données sont bien récupérés
+    // eslint-disable-next-line no-console
+    console.log(data);
     if (data) return;
     getData();
   });
+  
   
   return (
     <DataContext.Provider

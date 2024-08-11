@@ -7,13 +7,18 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
+
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1 
+  // fait un tri sur les dates
 
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+      // condition si à la dernière carte on fait un -1 sinon on retourne a 0//
+      () => setIndex(index +1 < byDateDesc?.length || 0 ? index + 1 : 0),
+      // problème avec length by date vient de focus qui vient du fichier json prend du temps pour récup exécute avant la récup le ? = si ca existe on éxécute le code 
+      // si lenght est pas la utilise 0 
       5000
     );
   };
@@ -23,9 +28,11 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        // div problème au niveua de la clé trouvé dans la console clé pas dans le bon élément 
+        // créer un new élément pour lui appliquer la clé
+        <div  key={event.title}>
           <div
-            key={event.title}
+           
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -41,18 +48,23 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc.map((test, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`${test.date}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
-                  onChange={()=> idx(radioIdx)}
+                    // eslint-disable-next-line spaced-comment
+                    //modifier l'index image et pas de la clé, on utilise test au lieu de event.id 
+      
+                  checked={index === radioIdx}
+                  readOnly // les boutons suivent les élément pas cliquable avec Onchange//
+
+              
                 />
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
