@@ -15,7 +15,7 @@ const Slider = () => {
   );
   const nextCard = () => {
     setTimeout(
-      // condition si à la dernière carte on fait un -1 sinon on retourne a 0//
+      // condition si à la dernière carte on fait un -1 sinon on retourne a 0 +1 permet de ne pas dépasser la taille des focuse qui était à 3 //
       () => setIndex(index +1 < byDateDesc?.length || 0 ? index + 1 : 0),
       // problème avec length by date vient de focus qui vient du fichier json prend du temps pour récup exécute avant la récup le ? = si ca existe on éxécute le code 
       // si lenght est pas la utilise 0 
@@ -29,10 +29,9 @@ const Slider = () => {
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
         // div problème au niveua de la clé trouvé dans la console clé pas dans le bon élément 
-        // créer un new élément pour lui appliquer la clé
+        // créer un new élément pour lui appliquer la clé clé enfant direct de la map
         <div  key={event.title}>
           <div
-           
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}

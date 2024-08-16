@@ -17,7 +17,13 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   // récupère le dernier evenement et on l'affiche dans EventCard
   const { data } = useData();
-  const lastEvent = data?.events?.[data.events.length - 1];
+  // const lastEvent = data?.events?.[data.events.length - 1];
+
+const lastEvent = data?.events.sort((evtA, evtB) =>
+  new Date(evtA.date) > new Date(evtB.date) ? -1 : 1 
+// fait un tri sur les dates
+)[0];
+
 
   return <>
     <header>
@@ -27,7 +33,7 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer">
+      <section className="ServicesContainer" id="nos-services">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -55,12 +61,12 @@ const Page = () => {
             module de formation innovant
           </ServiceCard>
         </div>
-      </section>
-      <section className="EventsContainer">
+      </section> 
+      <section className="EventsContainer" id="nos-realisations"> 
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
-      <section className="PeoplesContainer">
+      <section className="PeoplesContainer" id="notre-equipe">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -121,6 +127,10 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {
+          // eventcard afficher que si lastEvent n'est pas null 
+          lastEvent &&
+       
         <EventCard
           imageSrc={lastEvent.cover}
           title={lastEvent.title}
@@ -128,6 +138,7 @@ const Page = () => {
           small
           label="boom"
         />
+         }
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
