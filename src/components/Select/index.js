@@ -18,7 +18,7 @@ const Select = ({
   const changeValue = (newValue) => {
     onChange(newValue);// besoin d'une valeur pour modifier les types séléctionnés
     setValue(newValue);
-    setCollapsed(newValue);
+    setCollapsed(true);
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">

@@ -13,6 +13,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
     case FIELD_TYPES.INPUT_TEXT:
       component = (
         <input
+        required
           type="text"
           name={name}
           placeholder={placeholder}
@@ -21,11 +22,12 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
       );
       break;
     case FIELD_TYPES.TEXTAREA:
-      component = <textarea name={name} data-testid="field-testid" />;
+      component = <textarea required name={name} data-testid="field-testid" />;
       break;
     default:
       component = (
         <input
+        required // modification 
           type="text"
           name={name}
           placeholder={placeholder}
