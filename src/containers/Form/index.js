@@ -18,7 +18,6 @@ const Form = ({ onSuccess, onError }) => {
         setSending(false);
         // on appel la fonction onSuccess une fois que setSending termine son taff 
         // pour que le message de confirmation puisse s'afficher
-      
         onSuccess();
       } catch (err) {
        

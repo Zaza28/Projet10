@@ -17,11 +17,9 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   // récupère le dernier evenement et on l'affiche dans EventCard
   const { data } = useData();
-  // const lastEvent = data?.events?.[data.events.length - 1];
-
 const lastEvent = data?.events.sort((evtA, evtB) =>
   new Date(evtA.date) > new Date(evtB.date) ? -1 : 1 
-// fait un tri sur les dates
+// fait un tri sur les dates et affiche le dernier event
 )[0];
 
 

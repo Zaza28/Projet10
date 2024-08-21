@@ -9,16 +9,14 @@ const Slider = () => {
   const [index, setIndex] = useState(0);
 
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1 
-  // fait un tri sur les dates
-
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1 
   );
+
   const nextCard = () => {
     setTimeout(
-      // condition si à la dernière carte on fait un -1 sinon on retourne a 0 +1 permet de ne pas dépasser la taille des focuse qui était à 3 //
+  
       () => setIndex(index +1 < byDateDesc?.length || 0 ? index + 1 : 0),
-      // problème avec length by date vient de focus qui vient du fichier json prend du temps pour récup exécute avant la récup le ? = si ca existe on éxécute le code 
-      // si lenght est pas la utilise 0 
+     
       5000
     );
   };
@@ -28,7 +26,7 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        // div problème au niveua de la clé trouvé dans la console clé pas dans le bon élément 
+        // div problème au niveau de la clé trouvé dans la console clé pas dans le bon élément 
         // créer un new élément pour lui appliquer la clé clé enfant direct de la map
         <div  key={event.title}>
           <div
